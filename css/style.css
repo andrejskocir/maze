@@ -18,9 +18,7 @@ body{
     align-items:center;
     justify-content:center;
   }
-  canvas{
-      background: #000;
-  }
+
 
 h1{ 
     font-size: 5em;
@@ -29,26 +27,12 @@ h1{
     text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--clr-neon);
     position: relative;
 }
-
-#play{
-    width:70px;
-    height: 70px;
-    background-image: url("../images/play.png");
+.opis{
+  color: white;
+  font-size: 2.5em;
+  position: absolute;
+  top: 9em;
 }
-#play:hover{
-    cursor: pointer;
-}
-#pause{
-    width:70px;
-    height: 70px;
-    display: inline-block;
-    background-image: url("../images/pause.png");
-    display: none;
-}
-#pause:hover{
-    cursor: pointer;
-}
-
 .neon-button {
     font-size: 2rem;
     margin-top: 1em;
