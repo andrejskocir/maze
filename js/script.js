@@ -144,7 +144,7 @@
         let y = (this.rowNum * this.parentSize) / columns + 1;
   
         let img = new Image();
-        img.src = "./images/icon.png";
+        img.src = "./images/icon1.png";
         img.onload = function () {
           ctx.drawImage(img, x, y, 60, 60);
           ctx.fillRect(
@@ -193,7 +193,7 @@
         }
         if (this.goal) {
           let cilj = new Image();
-          cilj.src = "./images/finish.jpg";
+          cilj.src = "./images/goal.png";
           ctx.drawImage(cilj, x, y, 60, 60);
           ctx.fillRect(
             x,
