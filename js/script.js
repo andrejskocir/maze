@@ -35,9 +35,9 @@
       draw() {
         maze.width = this.size;
         maze.height = this.size;
-        maze.style.background = "black";
+        maze.style.background = "transparent";
 
-        //   maze.style.background = "url('./images/SG_backgroud.jpg')";
+      // maze.style.background = "url('./images/bg.jpg')";
         current.visited = true;
         for (let r = 0; r < this.rows; r++) {
           for (let c = 0; c < this.columns; c++) {
@@ -146,7 +146,7 @@
         let img = new Image();
         img.src = "./images/icon.png";
         img.onload = function () {
-          ctx.drawImage(img, x, y, 50, 50);
+          ctx.drawImage(img, x, y, 60, 60);
           ctx.fillRect(
             x,
             y,
@@ -180,8 +180,10 @@
         let y = (this.rowNum * size) / rows;
   
         ctx.strokeStyle = "#ffffff";
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "transparent";
         ctx.lineWidth = 2;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = "hsl(317 100% 54%)";
         if (this.walls.topWall) this.drawTopWall(x, y, size, columns, rows);
         if (this.walls.rightWall) this.drawRightWall(x, y, size, columns, rows);
         if (this.walls.bottomWall) this.drawBottomWall(x, y, size, columns, rows);
@@ -190,13 +192,23 @@
           ctx.fillRect(x + 1, y + 1, size / columns - 2, size / rows - 2);
         }
         if (this.goal) {
-          ctx.fillStyle = "hsl(317 100% 54%)";
-          ctx.fillRect(x + 1, y + 1, size / columns - 2, size / rows - 2);
+          let cilj = new Image();
+          cilj.src = "./images/finish.jpg";
+          ctx.drawImage(cilj, x, y, 60, 60);
+          ctx.fillRect(
+            x,
+            y,
+            this.parentSize / columns - 3,
+            this.parentSize / columns - 3
+          );
+
+         // ctx.fillStyle = "hsl(317 100% 54%)";
+          //ctx.fillRect(x + 1, y + 1, size / columns - 2, size / rows - 2);
         }
       }
     }
   
-    let newMaze = new Maze(500, 10, 10);
+    let newMaze = new Maze(600, 10, 10);
     newMaze.setup();
     newMaze.draw();
 });
