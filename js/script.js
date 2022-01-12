@@ -212,3 +212,41 @@
     newMaze.setup();
     newMaze.draw();
 });
+
+
+
+
+
+
+
+
+
+
+
+//sweetalert
+const info = document.querySelector(".info");
+const copy = document.getElementById("copy");
+
+info.addEventListener("click",(e)=>{
+  Swal.fire({
+    title: 'Instructions',
+    color: '#716add',
+    text: 'The maze will be automaticly generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!',
+    background: 'linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.3)),hsl(317 70% 54%)',
+    confirmButtonColor: "hsl(317 70% 54%)",
+  })
+  
+
+})
+
+copy.addEventListener("click",(e)=>{
+  Swal.fire({
+    title: 'Credits',
+    color: '#716add',
+    text: 'Made by Andrej Skočir.',
+    background: 'linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.3)),hsl(317 70% 54%)',
+    confirmButtonColor: "hsl(317 70% 54%)",
+  })
+  
+
+})
