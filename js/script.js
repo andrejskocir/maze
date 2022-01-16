@@ -156,25 +156,6 @@ start.addEventListener("click", (e) => {
 
     }
 
-    unhighlight(columns) {
-      let x = (this.colNum * this.parentSize) / columns + 1;
-      let y = (this.rowNum * this.parentSize) / columns + 1;
-
-      ctx.clearRect(
-        x,
-        y,
-        this.parentSize / columns - 3,
-        this.parentSize / columns - 3
-      );
-      ctx.fillStyle="transparent";
-      ctx.fillRect(
-        x,
-        y,
-        this.parentSize / columns - 3,
-        this.parentSize / columns - 3
-      );
-
-    }
 
 
 
@@ -308,12 +289,34 @@ let backdrop= document.querySelector(".backdrop");
 
 replay.addEventListener("click", () => {
   location.reload();
+
 });
 
-close.addEventListener("click", () => {
-  complete.style.display = "none";
-  backdrop.style.display = "none";
+replay.addEventListener("mousemove", () => {
+  replay.style.transition = "0.5s ease";
 });
+
+
+let play = document.getElementById("play");
+let audio=new Audio('audio/song.mp3');
+
+function playSong(){
+
+  audio.loop=true;
+  audio.volume = 0.1;
+  audio.play();
+  document.getElementById("play").style.display= "none";
+  document.getElementById("pause").style.display= "block";
+}
+function stopSong(){
+  audio.pause();
+  document.getElementById("play").style.display= "block";
+  document.getElementById("pause").style.display= "none";
+}
+  
+  
+  
+
 
 
 
