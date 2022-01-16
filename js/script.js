@@ -303,7 +303,7 @@ let audio=new Audio('audio/song.mp3');
 function playSong(){
 
   audio.loop=true;
-  audio.volume = 0.1;
+  audio.volume = 0.2;
   audio.play();
   document.getElementById("play").style.display= "none";
   document.getElementById("pause").style.display= "block";
