@@ -60,7 +60,7 @@ start.addEventListener("click", (e) => {
         current.highlight(this.columns);
       }
       if (this.stack.length === 0) {
-        
+        generationComplete = true;
         return;
         
       }
@@ -214,6 +214,7 @@ start.addEventListener("click", (e) => {
   }
   document.addEventListener("keydown", move);
         function move(e) {
+          if (!generationComplete) return;
           let key = e.key;
           let row = current.rowNum;
           let col = current.colNum;
