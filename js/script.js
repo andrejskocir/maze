@@ -8,6 +8,7 @@ let current;
 let goal;
 let generationComplete = false;
 let grid;
+let level = 1;
 
 start.addEventListener("click", (e) => {
   opis.style.display = "none";
@@ -62,7 +63,7 @@ start.addEventListener("click", (e) => {
       if (this.stack.length === 0) {
         generationComplete = true;
         return;
-        
+
       }
 
       window.requestAnimationFrame(() => {
@@ -150,7 +151,18 @@ start.addEventListener("click", (e) => {
       let img = new Image();
       img.src = "./images/icon1.png";
       img.onload = function () {
-        ctx.drawImage(img, x, y, 60, 60);
+        switch (level) {
+          case 1:
+            ctx.drawImage(img, x + 5, y + 5, 50, 50);
+            break;
+          case 2:
+            ctx.drawImage(img, x + 5, y + 5, 40, 40);
+            break;
+          case 3:
+            ctx.drawImage(img, x + 5, y + 5, 30, 30);
+            break;
+        }
+
       };
 
 
@@ -197,13 +209,36 @@ start.addEventListener("click", (e) => {
       if (this.goal) {
         let cilj = new Image();
         cilj.src = "./images/goal.png";
-        ctx.drawImage(cilj, x, y, 60, 60);
-        ctx.fillRect(
-          x,
-          y,
-          this.parentSize / columns - 3,
-          this.parentSize / columns - 3
-        );
+        switch (level) {
+          case 1:
+            ctx.drawImage(cilj, x + 5, y + 5, 50, 50);
+            ctx.fillRect(
+              x,
+              y,
+              this.parentSize / columns - 3,
+              this.parentSize / columns - 3
+            );
+            break;
+          case 2:
+            ctx.drawImage(cilj, x + 5, y + 5, 40, 40);
+            ctx.fillRect(
+              x,
+              y,
+              this.parentSize / columns - 3,
+              this.parentSize / columns - 3
+            );
+            break;
+          case 3:
+            ctx.drawImage(cilj, x + 5, y + 5, 30, 30);
+            ctx.fillRect(
+              x,
+              y,
+              this.parentSize / columns - 3,
+              this.parentSize / columns - 3
+            );
+            break;
+
+        }
 
 
 
@@ -213,110 +248,146 @@ start.addEventListener("click", (e) => {
     }
   }
   document.addEventListener("keydown", move);
-        function move(e) {
-          if (!generationComplete) return;
-          let key = e.key;
-          let row = current.rowNum;
-          let col = current.colNum;
-          switch (key) {
-            case "ArrowUp":
-              if (!current.walls.topWall) {
-                let next = newMaze.grid[row - 1][col];
-                current = next;
-                newMaze.draw();
-                current.highlight(newMaze.columns);
-                // not required if goal is in bottom right
-                if (current.goal){
-                  complete.style.display = "block";
-                  backdrop.style.display = "block";
-                } 
-              }
-              break;
-
-            case "ArrowRight":
-              if (!current.walls.rightWall) {
-                let next = newMaze.grid[row][col + 1];
-                current = next;
-                newMaze.draw();
-                current.highlight(newMaze.columns);
-                if (current.goal){
-                  complete.style.display = "block";
-                  backdrop.style.display = "block";
-                }
-              }
-              break;
-
-            case "ArrowDown":
-              if (!current.walls.bottomWall) {
-                let next = newMaze.grid[row + 1][col];
-                current = next;
-                newMaze.draw();
-                current.highlight(newMaze.columns);
-                if (current.goal){
-                  complete.style.display = "block";
-                  backdrop.style.display = "block";
-                }
-              }
-              break;
-
-            case "ArrowLeft":
-              if (!current.walls.leftWall) {
-                let next = newMaze.grid[row][col - 1];
-                current = next;
-                newMaze.draw();
-                current.highlight(newMaze.columns);
-                // not required if goal is in bottom right
-                if (current.goal){
-                  complete.style.display = "block";
-                  backdrop.style.display = "block";
-                }
-              }
-              break;
+  function move(e) {
+    if (!generationComplete) return;
+    let key = e.key;
+    let row = current.rowNum;
+    let col = current.colNum;
+    switch (key) {
+      case "ArrowUp":
+        if (!current.walls.topWall) {
+          let next = newMaze.grid[row - 1][col];
+          current = next;
+          newMaze.draw();
+          current.highlight(newMaze.columns);
+          // not required if goal is in bottom right
+          if (current.goal) {
+            generationComplete = false;
+            level++;
+            complete.style.display = "block";
+            backdrop.style.display = "block";
           }
-          
         }
+        break;
 
-  let newMaze = new Maze(600, 10, 10);
-  newMaze.setup();
-  newMaze.draw();
+      case "ArrowRight":
+        if (!current.walls.rightWall) {
+          let next = newMaze.grid[row][col + 1];
+          current = next;
+          newMaze.draw();
+          current.highlight(newMaze.columns);
+          if (current.goal) {
+            generationComplete = false;
+            level++;
+            complete.style.display = "block";
+            backdrop.style.display = "block";
+          }
+        }
+        break;
+
+      case "ArrowDown":
+        if (!current.walls.bottomWall) {
+          let next = newMaze.grid[row + 1][col];
+          current = next;
+          newMaze.draw();
+          current.highlight(newMaze.columns);
+          if (current.goal) {
+            generationComplete = false;
+            level++;
+            complete.style.display = "block";
+            backdrop.style.display = "block";
+          }
+        }
+        break;
+
+      case "ArrowLeft":
+        if (!current.walls.leftWall) {
+          let next = newMaze.grid[row][col - 1];
+          current = next;
+          newMaze.draw();
+          current.highlight(newMaze.columns);
+          // not required if goal is in bottom right
+          if (current.goal) {
+            generationComplete = false;
+            level++;
+            complete.style.display = "block";
+            backdrop.style.display = "block";
+          }
+        }
+        break;
+    }
+
+  }
+  let complete = document.querySelector(".complete");
+  let tekst = document.querySelector(".tekst");
+  let replay = document.querySelector(".replay");
+  let backdrop = document.querySelector(".backdrop");
+  let nivo = document.getElementById("nivo");
+
+  let newMaze;
+  newLevel(level);
+  
+  function newLevel(level) {
+    
+    switch (level) {
+      case 1:
+        newMaze = new Maze(600, 10, 10);
+        nivo.innerHTML = "Play level 2";
+        break;
+      case 2:
+        newMaze = new Maze(600, 12, 12); 
+        nivo.innerHTML = "Play level 3";
+        break;
+        
+      case 3:
+        newMaze = new Maze(600, 15, 15); 
+        tekst.innerHTML = "Congratulations, game completed.";
+        nivo.innerHTML = "Play again";
+        break;
+      case 4:
+        location.reload();
+    }
+
+    newMaze.setup();
+    newMaze.draw();
+  }
+
+  replay.addEventListener("click", () => {
+
+    newLevel(level);
+    complete.style.display = "none";
+    backdrop.style.display = "none";
+  });
+
+  replay.addEventListener("mousemove", () => {
+    replay.style.transition = "0.5s ease";
+  });
 });
 
-let complete = document.querySelector(".complete");
-let replay = document.querySelector(".replay");
-let close = document.querySelector(".close");
-let backdrop= document.querySelector(".backdrop");
 
 
 
-replay.addEventListener("click", () => {
-  location.reload();
-
-});
-
-replay.addEventListener("mousemove", () => {
-  replay.style.transition = "0.5s ease";
-});
 
 
 let play = document.getElementById("play");
-let audio=new Audio('audio/song.mp3');
+let audio = new Audio('audio/song.mp3');
 
-function playSong(){
+function playSong() {
 
-  audio.loop=true;
-  audio.volume = 0.2;
+  audio.loop = true;
+  audio.volume = 0.8;
   audio.play();
-  document.getElementById("play").style.display= "none";
-  document.getElementById("pause").style.display= "block";
+  document.getElementById("play").style.display = "block";
+  document.getElementById("pause").style.display = "none";
 }
-function stopSong(){
+function stopSong() {
   audio.pause();
-  document.getElementById("play").style.display= "block";
-  document.getElementById("pause").style.display= "none";
+  document.getElementById("play").style.display = "none";
+  document.getElementById("pause").style.display = "block";
 }
-  
-  
-  
+
+
+
 
 
 
@@ -340,7 +411,7 @@ info.addEventListener("click", (e) => {
   Swal.fire({
     title: 'Instructions',
     color: '#716add',
-    text: 'The maze will be automaticly generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!',
+    text: 'The maze will be automatically generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!',
     background: 'linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.3)),hsl(317 70% 54%)',
     confirmButtonColor: "hsl(317 70% 54%)",
   })

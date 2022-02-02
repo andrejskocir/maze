@@ -1,4 +1,5 @@
 <html lang="si">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -6,27 +7,37 @@
     <link rel="icon" type="image/ico" href="images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap"
+        rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
     <title>Maze</title>
 </head>
 
 <body>
-    <h1>Neon Maze Game</h1> 
-    <h2 class="opis">Press start to generate a maze.</h2>
-    <canvas width="600px" height="600px" id="maze" ></canvas>
+    <h1>Neon Maze Game</h1>
+    <h2 class="opis">Press start to play level 1.</h2>
+    <canvas width="600px" height="600px" id="maze"></canvas>
     <div class="backdrop"></div>
     <div class="complete">
-        
-        <h3>Maze Completed</h3>
-        <button class="replay">Play again</button>
-      </div>
+
+        <h3 class="tekst">Maze Completed</h3>
+        <button class="replay" id="nivo">Next level</button>
+    </div>
     <h2 class="neon-button" id="start">Start</h2>
     <div class="icons">
-        <div class="info"><p>i</p></div>
-        <div class="info" id="copy"><p>&copy;</p></div>
-        <div class="info" id="play" onclick="playSong()"><i class="fa fa-volume-up" aria-hidden="true"></i></div>
-        <div class="info" id="pause" onclick="stopSong()"><i class="fa fa-volume-off" aria-hidden="true" id="off"></i></div>
+        <div class="info">
+            <p>i</p>
+        </div>
+        <div class="info" id="copy">
+            <p>&copy;</p>
+        </div>
+        <div class="info" id="play" onclick="stopSong()"><i class="fa fa-volume-up" aria-hidden="true"></i></div>
+        <div class="info" id="pause" onclick="playSong()"><span id="off" class="material-icons">volume_off</span>
+            
+            
+        </div>
     </div>
     </div>
     <script type="text/javascript" src="js/script.js"></script>
