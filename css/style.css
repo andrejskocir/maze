@@ -61,15 +61,14 @@ h1{
 #play{
   display: none;
 }
-i{
+#up{
   display: block;
   color:var(--clr-neon);
-  font-size: 1.9em;
+  font-size: 2em;
   text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--clr-neon);
-  font-weight: 600;
   position: absolute;
-  top: 0.4em;
-  right: 0.4em;
+  top: 0.3em;
+  right: 0.35em;
 }
 #off{
   font-size: 2em;
