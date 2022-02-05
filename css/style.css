@@ -89,6 +89,51 @@ h1{
   opacity: 1;
   transition: 250ms ease;
 }
+.infoAlert{
+  display: none;
+  position: absolute;
+  width: 42em;
+  height: 20em;
+  background: linear-gradient(hsl(317 70% 30%),black);
+  z-index: 20;
+  padding-top: 2.5em;
+  text-align: center;
+  border-radius: 0.5em;
+  border: 2px solid white;
+  transition: 0.5s ease;
+  animation: popup 0.7s ease;  
+  box-shadow:  0 0 0.5em 0 white;
+  padding: 1em 1em;
+}
+.credits{
+  display: none;
+  position: absolute;
+  width: 32em;
+  height: 17em;
+  background: linear-gradient(hsl(317 70% 30%),black);
+  z-index: 20;
+  padding-top: 2.5em;
+  text-align: center;
+  border-radius: 0.5em;
+  border: 2px solid white;
+  transition: 0.5s ease;
+  animation: popup 0.7s ease;  
+  box-shadow:  0 0 0.5em 0 white;
+  padding: 1em 1em;
+}
+.instructions{
+  font-size: 2.75em;
+  color: white;
+  text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--clr-neon);
+  margin: 0.5em 0;
+}
+.copy{
+  font-size: 2em;
+}
+.infoAlert p{
+  color: white;
+  font-size: 1.125em;
+}
 
 .complete {
   display: none;
@@ -130,7 +175,7 @@ to{
   text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--clr-neon);
 }
 
-.complete button{
+.complete button, .ok , .ok1{
   cursor: pointer;
   padding: 0.25em 1em;
   font-size: 1.125em;
@@ -141,7 +186,7 @@ to{
   margin: 4em 2em;
   transition: 0.25s ease;
 }
-.complete button:hover{
+.complete button:hover, .ok:hover, .ok1:hover{
   color: var(--clr-neon);
   border: var(--clr-neon) 0.125em solid;
   

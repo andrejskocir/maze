@@ -9,6 +9,8 @@ let goal;
 let generationComplete = false;
 let grid;
 let level = 1;
+let moveSound = new Audio('audio/move.wav');
+let winSound = new Audio('audio/win.wav');
 
 start.addEventListener("click", (e) => {
   opis.style.display = "none";
@@ -253,6 +255,9 @@ start.addEventListener("click", (e) => {
     let key = e.key;
     let row = current.rowNum;
     let col = current.colNum;
+    moveSound.pause();
+    moveSound.play();
+    
     switch (key) {
       case "ArrowUp":
         if (!current.walls.topWall) {
@@ -262,11 +267,13 @@ start.addEventListener("click", (e) => {
           current.highlight(newMaze.columns);
           // not required if goal is in bottom right
           if (current.goal) {
+            winSound.play();
             generationComplete = false;
             level++;
             complete.style.display = "block";
             backdrop.style.display = "block";
           }
+          
         }
         break;
 
@@ -277,6 +284,7 @@ start.addEventListener("click", (e) => {
           newMaze.draw();
           current.highlight(newMaze.columns);
           if (current.goal) {
+            winSound.play();
             generationComplete = false;
             level++;
             complete.style.display = "block";
@@ -292,6 +300,7 @@ start.addEventListener("click", (e) => {
           newMaze.draw();
           current.highlight(newMaze.columns);
           if (current.goal) {
+            winSound.play();
             generationComplete = false;
             level++;
             complete.style.display = "block";
@@ -308,6 +317,7 @@ start.addEventListener("click", (e) => {
           current.highlight(newMaze.columns);
           // not required if goal is in bottom right
           if (current.goal) {
+            winSound.play();
             generationComplete = false;
             level++;
             complete.style.display = "block";
@@ -316,6 +326,7 @@ start.addEventListener("click", (e) => {
         }
         break;
     }
+    
 
   }
   let complete = document.querySelector(".complete");
@@ -372,6 +383,8 @@ start.addEventListener("click", (e) => {
 let play = document.getElementById("play");
 let audio = new Audio('audio/song.mp3');
 
+
+
 function playSong() {
 
   audio.loop = true;
@@ -406,27 +419,27 @@ function stopSong() {
 //sweetalert
 const info = document.querySelector(".info");
 const copy = document.getElementById("copy");
+const infoAlert = document.querySelector(".infoAlert");
+const ok = document.querySelector(".ok");
+const ok1 = document.querySelector(".ok1");
+const credits = document.querySelector(".credits");
+
+
 
 info.addEventListener("click", (e) => {
-  Swal.fire({
-    title: 'Instructions',
-    color: '#716add',
-    text: 'The maze will be automatically generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!',
-    background: 'linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.3)),hsl(317 70% 54%)',
-    confirmButtonColor: "hsl(317 70% 54%)",
-  })
+  infoAlert.style.display = "block";
+})
 
-
+ok.addEventListener("click",()=>{
+  infoAlert.style.display = "none";
+  infoAlert.style.transition = "0.5s";
+})
+ok1.addEventListener("click",()=>{
+  credits.style.display = "none";
+  credits.style.transition = "0.5s";
 })
 
 copy.addEventListener("click", (e) => {
-  Swal.fire({
-    title: 'Credits',
-    color: '#716add',
-    text: 'Made by Andrej Skočir.',
-    background: 'linear-gradient(rgba(255,255,255,0.7),rgba(255,255,255,0.3)),hsl(317 70% 54%)',
-    confirmButtonColor: "hsl(317 70% 54%)",
-  })
-
+  credits.style.display = "block";
 
 })
