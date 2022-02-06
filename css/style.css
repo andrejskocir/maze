@@ -1,5 +1,10 @@
+@font-face {
+  font-family: OriginTech;
+  src: url(../font/OriginTech.otf);
+}
+
 :root {
-    --clr-neon: hsl(317 100% 54%);
+    --clr-neon: #2bd01f;
     --clr-bg: hsl(323 21% 16%);
   }
   
@@ -8,18 +13,28 @@
 	padding:0;
 	box-sizing:border-box;
   -moz-box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: OriginTech, sans-serif;
 }
 body{
-    background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.8)),url(../images/bg.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+  overflow: hidden;
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
   }
-
+  .wrapper{
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-image: radial-gradient(rgba(0,0,0,0.7),rgba(0,0,0,1)),url(../images/bg1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(10px) saturate(180%);
+    transform: scale(1.1);
+    z-index: -1;
+  }
 
 h1{ 
     font-size: 5em;
@@ -27,6 +42,7 @@ h1{
     padding: 0.25em 1em;
     text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--clr-neon);
     position: relative;
+    margin-bottom: 0.75em;
 }
 .opis{
   color: white;
@@ -89,38 +105,7 @@ h1{
   opacity: 1;
   transition: 250ms ease;
 }
-.infoAlert{
-  display: none;
-  position: absolute;
-  width: 42em;
-  height: 20em;
-  background: linear-gradient(hsl(317 70% 30%),black);
-  z-index: 20;
-  padding-top: 2.5em;
-  text-align: center;
-  border-radius: 0.5em;
-  border: 2px solid white;
-  transition: 0.5s ease;
-  animation: popup 0.7s ease;  
-  box-shadow:  0 0 0.5em 0 white;
-  padding: 1em 1em;
-}
-.credits{
-  display: none;
-  position: absolute;
-  width: 32em;
-  height: 17em;
-  background: linear-gradient(hsl(317 70% 30%),black);
-  z-index: 20;
-  padding-top: 2.5em;
-  text-align: center;
-  border-radius: 0.5em;
-  border: 2px solid white;
-  transition: 0.5s ease;
-  animation: popup 0.7s ease;  
-  box-shadow:  0 0 0.5em 0 white;
-  padding: 1em 1em;
-}
+
 .instructions{
   font-size: 2.75em;
   color: white;
@@ -140,7 +125,7 @@ h1{
   position: absolute;
   width: 42em;
   height: 20em;
-  background: linear-gradient(hsl(317 70% 30%),black);
+  background: linear-gradient(var(--clr-neon),black);
   z-index: 20;
   padding-top: 2.5em;
   text-align: center;
@@ -175,7 +160,7 @@ to{
   text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--clr-neon);
 }
 
-.complete button, .ok , .ok1{
+.complete button{
   cursor: pointer;
   padding: 0.25em 1em;
   font-size: 1.125em;
@@ -186,7 +171,7 @@ to{
   margin: 4em 2em;
   transition: 0.25s ease;
 }
-.complete button:hover, .ok:hover, .ok1:hover{
+.complete button:hover{
   color: var(--clr-neon);
   border: var(--clr-neon) 0.125em solid;
   

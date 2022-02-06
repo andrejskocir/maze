@@ -1,6 +1,7 @@
 
 var maze = document.getElementById("maze");
 let ctx = maze.getContext("2d");
+ctx.scale(2,2);
 let size = 600;
 const start = document.getElementById("start");
 const opis = document.querySelector(".opis");
@@ -10,6 +11,7 @@ let generationComplete = false;
 let grid;
 let level = 1;
 let moveSound = new Audio('audio/move.wav');
+    moveSound.volume = 0.5;
 let winSound = new Audio('audio/win.wav');
 
 start.addEventListener("click", (e) => {
@@ -67,12 +69,30 @@ start.addEventListener("click", (e) => {
         return;
 
       }
+      switch(level){
+        case 1:
+          window.requestAnimationFrame(() => {
+            setTimeout(() => {
+              this.draw();
+            }, 5);
+          });
+          break;
+        case 2:
+          window.requestAnimationFrame(() => {
+            setTimeout(() => {
+              this.draw();
+            }, 2);
+          });
+          break;
+         case 3:
+          window.requestAnimationFrame(() => {
+            setTimeout(() => {
+              this.draw();
+            }, 0.1);
+          });
+          break;   
+      }
 
-      window.requestAnimationFrame(() => {
-        setTimeout(() => {
-          this.draw();
-        }, 5);
-      });
     }
   }
 
@@ -196,11 +216,11 @@ start.addEventListener("click", (e) => {
       let x = (this.colNum * size) / columns;
       let y = (this.rowNum * size) / rows;
 
-      ctx.strokeStyle = "white";
+      ctx.strokeStyle = "#2bd01f";
       ctx.fillStyle = "transparent";
       ctx.lineWidth = 2;
       ctx.shadowBlur = 10;
-      ctx.shadowColor = "hsl(317 100% 54%)";
+      ctx.shadowColor = "#2bd01f";
       if (this.walls.topWall) this.drawTopWall(x, y, size, columns, rows);
       if (this.walls.rightWall) this.drawRightWall(x, y, size, columns, rows);
       if (this.walls.bottomWall) this.drawBottomWall(x, y, size, columns, rows);
@@ -255,12 +275,12 @@ start.addEventListener("click", (e) => {
     let key = e.key;
     let row = current.rowNum;
     let col = current.colNum;
-    moveSound.pause();
-    moveSound.play();
-    
+
     switch (key) {
       case "ArrowUp":
         if (!current.walls.topWall) {
+          moveSound.pause();
+          moveSound.play();
           let next = newMaze.grid[row - 1][col];
           current = next;
           newMaze.draw();
@@ -273,12 +293,15 @@ start.addEventListener("click", (e) => {
             complete.style.display = "block";
             backdrop.style.display = "block";
           }
-          
+
         }
         break;
 
       case "ArrowRight":
         if (!current.walls.rightWall) {
+          moveSound.pause();
+          moveSound.play();
+
           let next = newMaze.grid[row][col + 1];
           current = next;
           newMaze.draw();
@@ -295,6 +318,9 @@ start.addEventListener("click", (e) => {
 
       case "ArrowDown":
         if (!current.walls.bottomWall) {
+          moveSound.pause();
+          moveSound.play();
+
           let next = newMaze.grid[row + 1][col];
           current = next;
           newMaze.draw();
@@ -311,6 +337,9 @@ start.addEventListener("click", (e) => {
 
       case "ArrowLeft":
         if (!current.walls.leftWall) {
+          moveSound.pause();
+          moveSound.play();
+
           let next = newMaze.grid[row][col - 1];
           current = next;
           newMaze.draw();
@@ -326,7 +355,7 @@ start.addEventListener("click", (e) => {
         }
         break;
     }
-    
+
 
   }
   let complete = document.querySelector(".complete");
@@ -337,21 +366,21 @@ start.addEventListener("click", (e) => {
 
   let newMaze;
   newLevel(level);
-  
+
   function newLevel(level) {
-    
+
     switch (level) {
       case 1:
         newMaze = new Maze(600, 10, 10);
         nivo.innerHTML = "Play level 2";
         break;
       case 2:
-        newMaze = new Maze(600, 12, 12); 
+        newMaze = new Maze(600, 12, 12);
         nivo.innerHTML = "Play level 3";
         break;
-        
+
       case 3:
-        newMaze = new Maze(600, 15, 15); 
+        newMaze = new Maze(600, 15, 15);
         tekst.innerHTML = "Congratulations, game completed.";
         nivo.innerHTML = "Play again";
         break;
@@ -419,27 +448,32 @@ function stopSong() {
 //sweetalert
 const info = document.querySelector(".info");
 const copy = document.getElementById("copy");
-const infoAlert = document.querySelector(".infoAlert");
-const ok = document.querySelector(".ok");
-const ok1 = document.querySelector(".ok1");
-const credits = document.querySelector(".credits");
+
 
 
 
 info.addEventListener("click", (e) => {
-  infoAlert.style.display = "block";
+  swal.fire({
+    title: 'Instructions',
+        text: "The maze will be automatically generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!",
+        background: "#55cc55",
+        customClass: {
+            confirmButton: 'no-border',
+          },
+        confirmButtonColor: '#353535',
+  });
 })
 
-ok.addEventListener("click",()=>{
-  infoAlert.style.display = "none";
-  infoAlert.style.transition = "0.5s";
-})
-ok1.addEventListener("click",()=>{
-  credits.style.display = "none";
-  credits.style.transition = "0.5s";
-})
 
 copy.addEventListener("click", (e) => {
-  credits.style.display = "block";
+  swal.fire({
+    title: 'Credits',
+        text: "Made by Andrej Skočir",
+        background: "#55cc55",
+        customClass: {
+            confirmButton: 'no-border',
+          },
+        confirmButtonColor: '#353535',
+  });
 
 })
