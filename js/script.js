@@ -4,19 +4,48 @@ let ctx = maze.getContext("2d");
 ctx.scale(2,2);
 let size = 600;
 const start = document.getElementById("start");
-const opis = document.querySelector(".opis");
+const container = document.querySelector(".container");
 let current;
 let goal;
 let generationComplete = false;
 let grid;
-let level = 1;
+const first = document.getElementById("first-option");
+const second = document.getElementById("second-option");
+
+const level1 = document.getElementById("level1");
+const level2 = document.getElementById("level2");
+const level3 = document.getElementById("level3");
+
+let level;
+
+function getLevel(){
+  if(second.classList.contains("selected")){
+    level = 1;
+    } 
+    else if(first.classList.contains("selected")){
+      if(level1.classList.contains("selected")){
+        level = 1;
+      }
+      else if(level2.classList.contains("selected")) {
+        level = 2;
+      }   
+      else{
+        level = 3;
+      }    
+      
+      }
+      console.log(level);
+  
+  return level;
+}
+
 let moveSound = new Audio('audio/move.wav');
     moveSound.volume = 0.5;
 let winSound = new Audio('audio/win.wav');
 
-start.addEventListener("click", (e) => {
-  opis.style.display = "none";
+start.addEventListener("click", (e) => { 
   start.style.display = "none";
+  container.style.display = "none";
   class Maze {
     constructor(size, rows, columns) {
       this.size = size;
@@ -289,9 +318,24 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            level++;
-            complete.style.display = "block";
-            backdrop.style.display = "block";
+            if (first.classList.contains("selected")){
+              level=4;
+              newLevel(level);
+              tekst.innerHTML = "Congratulations, game completed.";
+              nivo.innerHTML = "Play again";
+              complete.style.display = "block";
+              backdrop.style.display = "block";
+            }
+
+            else
+            {
+              level++;
+              tekst.innerHTML = "Maze completed";
+              if(level!=4)
+              nivo.innerHTML = "Play level "+level;
+              complete.style.display = "block";
+              backdrop.style.display = "block";
+            }
           }
 
         }
@@ -309,9 +353,24 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            level++;
-            complete.style.display = "block";
-            backdrop.style.display = "block";
+            if (first.classList.contains("selected")){
+              level=4;
+              newLevel(level);
+              tekst.innerHTML = "Congratulations, game completed.";
+              nivo.innerHTML = "Play again";
+              complete.style.display = "block";
+              backdrop.style.display = "block";
+            }
+
+            else
+            {
+              level++;
+              tekst.innerHTML = "Maze completed";
+              if(level!=4)
+              nivo.innerHTML = "Play level "+level;
+              complete.style.display = "block";
+              backdrop.style.display = "block";
+            }
           }
         }
         break;
@@ -328,9 +387,24 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            level++;
-            complete.style.display = "block";
-            backdrop.style.display = "block";
+            if (first.classList.contains("selected")){
+              level=4;
+              newLevel(level);
+              tekst.innerHTML = "Congratulations, game completed.";
+              nivo.innerHTML = "Play again";
+              complete.style.display = "block";
+              backdrop.style.display = "block";
+            }
+
+            else
+            {
+              level++;
+              tekst.innerHTML = "Maze completed";
+              if(level!=4)
+              nivo.innerHTML = "Play level "+level;
+              complete.style.display = "block";
+              backdrop.style.display = "block";
+            }
           }
         }
         break;
@@ -348,9 +422,25 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            level++;
-            complete.style.display = "block";
-            backdrop.style.display = "block";
+            if (first.classList.contains("selected")){
+              level=4;
+              newLevel(level);
+              tekst.innerHTML = "Congratulations, game completed.";
+              nivo.innerHTML = "Play again";
+              complete.style.display = "block";
+              backdrop.style.display = "block";
+            }
+
+            else
+            {
+              level++;
+              tekst.innerHTML = "Maze completed";
+              if(level!=4)
+              nivo.innerHTML = "Play level "+level;
+              complete.style.display = "block";
+              backdrop.style.display = "block";
+            }
+ 
           }
         }
         break;
@@ -385,7 +475,14 @@ start.addEventListener("click", (e) => {
         nivo.innerHTML = "Play again";
         break;
       case 4:
-        location.reload();
+        if(first.classList.contains("selected")){
+          setTimeout(()=>{
+            location.reload();
+          },3000);
+        }
+        else
+          location.reload();
+
     }
 
     newMaze.setup();
@@ -403,6 +500,58 @@ start.addEventListener("click", (e) => {
     replay.style.transition = "0.5s ease";
   });
 });
+
+
+
+
+level1.addEventListener("click",(e)=>{
+  level2.classList.remove("selected");
+  level3.classList.remove("selected");
+  level1.classList.add("selected");
+})
+level2.addEventListener("click",(e)=>{
+  level3.classList.remove("selected");
+  level1.classList.remove("selected");
+  level2.classList.add("selected");
+})
+level3.addEventListener("click",(e)=>{
+  level1.classList.remove("selected");
+  level2.classList.remove("selected");
+  level3.classList.add("selected");
+})
+
+first.addEventListener("click",() =>{
+  second.classList.remove("selected");
+  first.classList.add("selected");
+  options.style.visibility = "hidden";
+  select.style.display = "block";
+  start.style.display = "none";
+})
+
+second.addEventListener("click",() =>{
+  first.classList.remove("selected");
+  second.classList.add("selected");
+  options.style.visibility = "hidden";
+  select.style.display = "none";
+  start.style.display = "block";
+})
+
+const select = document.getElementById("select");
+const options = document.querySelector(".options");
+const opis = document.querySelector(".opis");
+select.addEventListener("click",()=>{
+  if(first.classList.contains("selected")){
+    options.style.visibility = "visible";
+    first.style.display = "none";
+    second.style.display = "none";
+    select.style.display = "none";
+    start.style.display = "block";
+    opis.style.display = "none";
+  }
+
+ 
+})
+
 
 
 

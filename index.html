@@ -18,7 +18,43 @@
 <body>
     <div class="wrapper"></div>
     <h1>Neon Maze Game</h1>
-    <h2 class="opis">Press start to play level 1</h2>
+    
+    <div class="container">
+        <h2 class="opis">CHOOSE PLAYING STYLE</h2>
+    <div class="items" id="first-option">
+        <p>LEVELS SEPERATLY</p>
+        <div class="levels">
+        <h2>1</h2>
+        <h2>2</h2>
+        <h2>3</h2>
+    </div>
+    </div>
+    <div class="items" id="second-option">
+        <p>LEVEL AFTER LEVEL</p>
+        <div class="levels" >
+        <h2>1</h2>
+        <span class="material-icons right">arrow_forward</span>
+        <h2>2</h2>
+        <span class="material-icons right">arrow_forward</span>
+        <h2>3</h2>
+    </div> 
+    </div>
+    <div class="options" id="options">
+        <h2>CHOOSE LEVEL</h2>
+        <div class="choose">
+
+            <button class="key" id="level1">1</button>
+            <button class="key" id="level2">2</button>
+            <button class="key" id="level3">3</button>
+        </div>
+
+
+    </div>
+
+    <button class="select" id="select">SELECT</button>
+    <h2 class="neon-button" id="start" onclick = "getLevel()">Start</h2>
+    </div>
+    
     <canvas width="600px" height="600px" id="maze"></canvas>
     <div class="backdrop"></div>
     <div class="complete">
@@ -26,7 +62,8 @@
         <h3 class="tekst">Maze Completed</h3>
         <button class="replay" id="nivo">Next level</button>
     </div>
-    <h2 class="neon-button" id="start">Start</h2>
+    
+
     <div class="icons">
         <div class="info">
             <p>i</p>
