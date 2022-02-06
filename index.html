@@ -21,7 +21,7 @@
     
     <div class="container">
         <h2 class="opis">CHOOSE PLAYING STYLE</h2>
-    <div class="items" id="first-option">
+    <div class="items" id="first-option" onclick="playSound()">
         <p>LEVELS SEPERATLY</p>
         <div class="levels">
         <h2>1</h2>
@@ -29,7 +29,7 @@
         <h2>3</h2>
     </div>
     </div>
-    <div class="items" id="second-option">
+    <div class="items" id="second-option" onclick="playSound()">
         <p>LEVEL AFTER LEVEL</p>
         <div class="levels" >
         <h2>1</h2>
@@ -39,13 +39,19 @@
         <h2>3</h2>
     </div> 
     </div>
+    <div class="items" id="third-option" onclick="playSound()">
+        <p>RANDOM LEVEL</p>
+        <div class="levels  third">
+            <h1 class="random">?</h1>
+    </div>
+    </div>
     <div class="options" id="options">
         <h2>CHOOSE LEVEL</h2>
         <div class="choose">
 
-            <button class="key" id="level1">1</button>
-            <button class="key" id="level2">2</button>
-            <button class="key" id="level3">3</button>
+            <button class="key" id="level1" onclick="playSound()">1</button>
+            <button class="key" id="level2" onclick="playSound()">2</button>
+            <button class="key" id="level3" onclick="playSound()">3</button>
         </div>
 
 

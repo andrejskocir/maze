@@ -11,6 +11,7 @@ let generationComplete = false;
 let grid;
 const first = document.getElementById("first-option");
 const second = document.getElementById("second-option");
+const third = document.getElementById("third-option");
 
 const level1 = document.getElementById("level1");
 const level2 = document.getElementById("level2");
@@ -22,7 +23,7 @@ function getLevel(){
   if(second.classList.contains("selected")){
     level = 1;
     } 
-    else if(first.classList.contains("selected")){
+  else if(first.classList.contains("selected")){
       if(level1.classList.contains("selected")){
         level = 1;
       }
@@ -34,9 +35,16 @@ function getLevel(){
       }    
       
       }
+  else if(third.classList.contains("selected")){
+      level = Math.floor(Math.random()*3+1);
+  }
       console.log(level);
   
   return level;
+}
+let menuSound = new Audio('audio/menu.mp3');
+function playSound(){
+  menuSound.play();
 }
 
 let moveSound = new Audio('audio/move.wav');
@@ -318,11 +326,13 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            if (first.classList.contains("selected")){
+            if (first.classList.contains("selected")||third.classList.contains("selected")){
+              tekst.innerHTML = "Congratulations, level "+level+" completed.";
               level=4;
               newLevel(level);
-              tekst.innerHTML = "Congratulations, game completed.";
-              nivo.innerHTML = "Play again";
+              
+              tekst.style.marginTop = "1em";
+              replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
@@ -353,11 +363,12 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            if (first.classList.contains("selected")){
+            if (first.classList.contains("selected")||third.classList.contains("selected")){
+              tekst.innerHTML = "Congratulations, level "+level+" completed.";
               level=4;
               newLevel(level);
-              tekst.innerHTML = "Congratulations, game completed.";
-              nivo.innerHTML = "Play again";
+              tekst.style.marginTop = "1em";
+              replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
@@ -387,11 +398,13 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            if (first.classList.contains("selected")){
+            if (first.classList.contains("selected")||third.classList.contains("selected")){
+              tekst.innerHTML = "Congratulations, level "+level+" completed.";
               level=4;
               newLevel(level);
-              tekst.innerHTML = "Congratulations, game completed.";
-              nivo.innerHTML = "Play again";
+              
+              tekst.style.marginTop = "1em";
+              replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
@@ -422,11 +435,13 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            if (first.classList.contains("selected")){
+            if (first.classList.contains("selected")||third.classList.contains("selected")){
+              tekst.innerHTML = "Congratulations, level "+level+" completed.";
               level=4;
               newLevel(level);
-              tekst.innerHTML = "Congratulations, game completed.";
-              nivo.innerHTML = "Play again";
+              
+              tekst.style.marginTop = "1em";
+              replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
@@ -475,7 +490,7 @@ start.addEventListener("click", (e) => {
         nivo.innerHTML = "Play again";
         break;
       case 4:
-        if(first.classList.contains("selected")){
+        if(first.classList.contains("selected")|| third.classList.contains("selected")){
           setTimeout(()=>{
             location.reload();
           },3000);
@@ -507,21 +522,32 @@ start.addEventListener("click", (e) => {
 level1.addEventListener("click",(e)=>{
   level2.classList.remove("selected");
   level3.classList.remove("selected");
+  level2.classList.remove("chosen");
+  level3.classList.remove("chosen");
   level1.classList.add("selected");
+  level1.classList.add("chosen");
+
 })
 level2.addEventListener("click",(e)=>{
   level3.classList.remove("selected");
   level1.classList.remove("selected");
+  level3.classList.remove("chosen");
+  level1.classList.remove("chosen");
   level2.classList.add("selected");
+  level2.classList.add("chosen");
 })
 level3.addEventListener("click",(e)=>{
   level1.classList.remove("selected");
   level2.classList.remove("selected");
+  level1.classList.remove("chosen");
+  level2.classList.remove("chosen");
   level3.classList.add("selected");
+  level3.classList.add("chosen");
 })
 
 first.addEventListener("click",() =>{
   second.classList.remove("selected");
+  third.classList.remove("selected");
   first.classList.add("selected");
   options.style.visibility = "hidden";
   select.style.display = "block";
@@ -530,7 +556,17 @@ first.addEventListener("click",() =>{
 
 second.addEventListener("click",() =>{
   first.classList.remove("selected");
+  third.classList.remove("selected");
   second.classList.add("selected");
+  options.style.visibility = "hidden";
+  select.style.display = "none";
+  start.style.display = "block";
+})
+
+third.addEventListener("click",() =>{
+  first.classList.remove("selected");
+  second.classList.remove("selected");
+  third.classList.add("selected");
   options.style.visibility = "hidden";
   select.style.display = "none";
   start.style.display = "block";
