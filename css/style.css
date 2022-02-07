@@ -261,7 +261,7 @@ h1{
   position: absolute;
   width: 42em;
   height: 20em;
-  background: linear-gradient(var(--clr-neon),black);
+  background: #111;
   z-index: 20;
   padding-top: 2.5em;
   text-align: center;
