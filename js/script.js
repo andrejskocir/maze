@@ -1,7 +1,6 @@
 
 var maze = document.getElementById("maze");
 let ctx = maze.getContext("2d");
-ctx.scale(2,2);
 let size = 600;
 const start = document.getElementById("start");
 const container = document.querySelector(".container");
@@ -9,17 +8,20 @@ let current;
 let goal;
 let generationComplete = false;
 let grid;
+
+//opcije v meniju
 const first = document.getElementById("first-option");
 const second = document.getElementById("second-option");
 const third = document.getElementById("third-option");
 
+//leveli
 const level1 = document.getElementById("level1");
 const level2 = document.getElementById("level2");
 const level3 = document.getElementById("level3");
 
+//funkcija getLevel() vraca level glede na opcijo ki jo izberemo v meniju
 let level;
-
-function getLevel(){
+function getLevel(){ 
   if(second.classList.contains("selected")){
     level = 1;
     } 
@@ -38,20 +40,13 @@ function getLevel(){
   else if(third.classList.contains("selected")){
       level = Math.floor(Math.random()*3+1);
   }
-      console.log(level);
-  
+  console.log(level); //za testiranje
   return level;
 }
-let menuSound = new Audio('audio/menu.mp3');
-function playSound(){
-  menuSound.play();
-}
 
-let moveSound = new Audio('audio/move.wav');
-    moveSound.volume = 0.5;
-let winSound = new Audio('audio/win.wav');
-
-start.addEventListener("click", (e) => { 
+start.addEventListener("click", (e) => {
+  playSound();
+  getLevel();
   start.style.display = "none";
   container.style.display = "none";
   class Maze {
@@ -80,8 +75,6 @@ start.addEventListener("click", (e) => {
       maze.width = this.size;
       maze.height = this.size;
       maze.style.background = "transparent";
-
-      // maze.style.background = "url('./images/bg.jpg')";
       current.visited = true;
       for (let r = 0; r < this.rows; r++) {
         for (let c = 0; c < this.columns; c++) {
@@ -89,24 +82,24 @@ start.addEventListener("click", (e) => {
           grid[r][c].show(this.size, this.rows, this.columns);
         }
       }
-      let next = current.checkNeighbours();
-      if (next) {
+      let next = current.checkNeighbours(); //naslednjo celico izbere glede na to ali ima naslednja celica kaksnega soseda
+      if (next) { //ce ga ima se izvede ta pogoj
         next.visited = true;
-        this.stack.push(current);
+        this.stack.push(current); //trenutno celico doda na stack
         current.highlight(this.columns);
-        current.removeWalls(current, next);
+        current.removeWalls(current, next); //med trenutno in naslednjo izbrise steno
         current = next;
-      } else if (this.stack.length > 0) {
+      } else if (this.stack.length > 0) { //ce naslednja nima soseda in stack ni izpraznjen, prazni celice iz sklada dokler ne pride spet do soseda
         let cell = this.stack.pop();
         current = cell;
         current.highlight(this.columns);
       }
-      if (this.stack.length === 0) {
+      if (this.stack.length === 0) { //ko je stack izpraznjen pomeni, da se je generiranje koncalo
         generationComplete = true;
         return;
 
       }
-      switch(level){
+      switch(level){ //glede na level se labirint generira z razlicno hitrostjo
         case 1:
           window.requestAnimationFrame(() => {
             setTimeout(() => {
@@ -210,7 +203,7 @@ start.addEventListener("click", (e) => {
       let img = new Image();
       img.src = "./images/icon1.png";
       img.onload = function () {
-        switch (level) {
+        switch (level) { //glede na level se velikost ikone spreminja
           case 1:
             ctx.drawImage(img, x + 5, y + 5, 50, 50);
             break;
@@ -298,17 +291,12 @@ start.addEventListener("click", (e) => {
             break;
 
         }
-
-
-
-        // ctx.fillStyle = "hsl(317 100% 54%)";
-        //ctx.fillRect(x + 1, y + 1, size / columns - 2, size / rows - 2);
       }
     }
   }
   document.addEventListener("keydown", move);
   function move(e) {
-    if (!generationComplete) return;
+    if (!generationComplete) return; //ce se labirint se ni generiral se ne mores premikati
     let key = e.key;
     let row = current.rowNum;
     let col = current.colNum;
@@ -322,7 +310,7 @@ start.addEventListener("click", (e) => {
           current = next;
           newMaze.draw();
           current.highlight(newMaze.columns);
-          // not required if goal is in bottom right
+          // ni potrebno ce je cilj v spodnjem desnem kotu
           if (current.goal) {
             winSound.play();
             generationComplete = false;
@@ -331,7 +319,7 @@ start.addEventListener("click", (e) => {
               level=4;
               newLevel(level);
               
-              tekst.style.marginTop = "1em";
+              tekst.style.marginTop = "1.5em";
               replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
@@ -367,7 +355,7 @@ start.addEventListener("click", (e) => {
               tekst.innerHTML = "Congratulations, level "+level+" completed.";
               level=4;
               newLevel(level);
-              tekst.style.marginTop = "1em";
+              tekst.style.marginTop = "1.5em";
               replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
@@ -403,7 +391,7 @@ start.addEventListener("click", (e) => {
               level=4;
               newLevel(level);
               
-              tekst.style.marginTop = "1em";
+              tekst.style.marginTop = "1.5em";
               replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
@@ -431,7 +419,7 @@ start.addEventListener("click", (e) => {
           current = next;
           newMaze.draw();
           current.highlight(newMaze.columns);
-          // not required if goal is in bottom right
+          // ni potrebno ce je cilj v spodnjem desnem kotu
           if (current.goal) {
             winSound.play();
             generationComplete = false;
@@ -439,8 +427,7 @@ start.addEventListener("click", (e) => {
               tekst.innerHTML = "Congratulations, level "+level+" completed.";
               level=4;
               newLevel(level);
-              
-              tekst.style.marginTop = "1em";
+              tekst.style.marginTop = "1.5em";
               replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
@@ -463,6 +450,7 @@ start.addEventListener("click", (e) => {
 
 
   }
+
   let complete = document.querySelector(".complete");
   let tekst = document.querySelector(".tekst");
   let replay = document.querySelector(".replay");
@@ -472,6 +460,7 @@ start.addEventListener("click", (e) => {
   let newMaze;
   newLevel(level);
 
+  //Za vsak level od 1-3 se generira razlicno velik labirint
   function newLevel(level) {
 
     switch (level) {
@@ -504,6 +493,7 @@ start.addEventListener("click", (e) => {
     newMaze.draw();
   }
 
+  //Gumb za naslednji level
   replay.addEventListener("click", () => {
 
     newLevel(level);
@@ -517,7 +507,7 @@ start.addEventListener("click", (e) => {
 });
 
 
-
+//Styling za zacetni menu
 
 level1.addEventListener("click",(e)=>{
   level2.classList.remove("selected");
@@ -588,16 +578,14 @@ select.addEventListener("click",()=>{
  
 })
 
-
-
-
-
-
-
+//Glasba in zvok
 let play = document.getElementById("play");
 let audio = new Audio('audio/song.mp3');
-
-
+//zvoki
+let moveSound = new Audio('audio/move.wav');
+    moveSound.volume = 0.5;
+let winSound = new Audio('audio/win.wav');
+let menuSound = new Audio('audio/menu.mp3');
 
 function playSong() {
 
@@ -613,34 +601,20 @@ function stopSong() {
   document.getElementById("pause").style.display = "block";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+function playSound(){
+  menuSound.play();
+}
 
 
 //sweetalert
 const info = document.querySelector(".info");
 const copy = document.getElementById("copy");
 
-
-
-
 info.addEventListener("click", (e) => {
+  playSound();
   swal.fire({
     title: 'Instructions',
-        text: "The maze will be automatically generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!",
+        text: "Choose the playing style you prefer. The maze will be automatically generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!",
         background: "#55cc55",
         customClass: {
             confirmButton: 'no-border',
@@ -651,6 +625,7 @@ info.addEventListener("click", (e) => {
 
 
 copy.addEventListener("click", (e) => {
+  playSound();
   swal.fire({
     title: 'Credits',
         text: "Made by Andrej Skočir",
