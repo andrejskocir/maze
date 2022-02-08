@@ -497,30 +497,20 @@ start.addEventListener("click", (e) => {
 
 //Styling za zacetni menu
 
-level1.addEventListener("click", (e) => {
-  level2.classList.remove("selected");
-  level3.classList.remove("selected");
-  level2.classList.remove("chosen");
-  level3.classList.remove("chosen");
-  level1.classList.add("selected");
-  level1.classList.add("chosen");
-
+level1.addEventListener("click", () => {
+  level2.classList.remove("selected","chosen");
+  level3.classList.remove("selected","chosen");
+  level1.classList.add("selected","chosen");
 })
-level2.addEventListener("click", (e) => {
-  level3.classList.remove("selected");
-  level1.classList.remove("selected");
-  level3.classList.remove("chosen");
-  level1.classList.remove("chosen");
-  level2.classList.add("selected");
-  level2.classList.add("chosen");
+level2.addEventListener("click", () => {
+  level3.classList.remove("selected","chosen");
+  level1.classList.remove("selected","chosen");
+  level2.classList.add("selected","chosen");
 })
-level3.addEventListener("click", (e) => {
-  level1.classList.remove("selected");
-  level2.classList.remove("selected");
-  level1.classList.remove("chosen");
-  level2.classList.remove("chosen");
-  level3.classList.add("selected");
-  level3.classList.add("chosen");
+level3.addEventListener("click", () => {
+  level1.classList.remove("selected","chosen");
+  level2.classList.remove("selected","chosen");
+  level3.classList.add("selected","chosen");
 })
 
 first.addEventListener("click", () => {
