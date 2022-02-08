@@ -1,4 +1,3 @@
-
 var maze = document.getElementById("maze");
 let ctx = maze.getContext("2d");
 let size = 600;
@@ -21,24 +20,23 @@ const level3 = document.getElementById("level3");
 
 //funkcija getLevel() vraca level glede na opcijo ki jo izberemo v meniju
 let level;
-function getLevel(){ 
-  if(second.classList.contains("selected")){
+function getLevel() {
+  if (second.classList.contains("selected")) {
     level = 1;
-    } 
-  else if(first.classList.contains("selected")){
-      if(level1.classList.contains("selected")){
-        level = 1;
-      }
-      else if(level2.classList.contains("selected")) {
-        level = 2;
-      }   
-      else{
-        level = 3;
-      }    
-      
-      }
-  else if(third.classList.contains("selected")){
-      level = Math.floor(Math.random()*3+1);
+  }
+  else if (first.classList.contains("selected")) {
+    if (level1.classList.contains("selected")) {
+      level = 1;
+    }
+    else if (level2.classList.contains("selected")) {
+      level = 2;
+    }
+    else {
+      level = 3;
+    }
+  }
+  else if (third.classList.contains("selected")) {
+    level = Math.floor(Math.random() * 3 + 1);
   }
   console.log(level); //za testiranje
   return level;
@@ -99,7 +97,7 @@ start.addEventListener("click", (e) => {
         return;
 
       }
-      switch(level){ //glede na level se labirint generira z razlicno hitrostjo
+      switch (level) { //glede na level se labirint generira z razlicno hitrostjo
         case 1:
           window.requestAnimationFrame(() => {
             setTimeout(() => {
@@ -114,13 +112,13 @@ start.addEventListener("click", (e) => {
             }, 2);
           });
           break;
-         case 3:
+        case 3:
           window.requestAnimationFrame(() => {
             setTimeout(() => {
               this.draw();
             }, 0.1);
           });
-          break;   
+          break;
       }
 
     }
@@ -158,7 +156,7 @@ start.addEventListener("click", (e) => {
       if (bottom && !bottom.visited) neighbours.push(bottom);
       if (left && !left.visited) neighbours.push(left);
 
-      if (neighbours.length !== 0) {
+      if (neighbours.length !== 0) { //ce je v tabeli neighbours kaksna celica jo nakljucno izbere
         let random = Math.floor(Math.random() * neighbours.length);
         return neighbours[random];
       } else {
@@ -171,7 +169,6 @@ start.addEventListener("click", (e) => {
       ctx.moveTo(x, y);
       ctx.lineTo(x + size / columns, y);
       ctx.stroke();
-
     }
 
     drawRightWall(x, y, size, columns, rows) {
@@ -198,8 +195,6 @@ start.addEventListener("click", (e) => {
     highlight(columns) {
       let x = (this.colNum * this.parentSize) / columns + 1;
       let y = (this.rowNum * this.parentSize) / columns + 1;
-
-
       let img = new Image();
       img.src = "./images/icon1.png";
       img.onload = function () {
@@ -219,9 +214,6 @@ start.addEventListener("click", (e) => {
 
 
     }
-
-
-
 
     removeWalls(cell1, cell2) {
       let x = cell1.colNum - cell2.colNum;
@@ -314,23 +306,22 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            if (first.classList.contains("selected")||third.classList.contains("selected")){
-              tekst.innerHTML = "Congratulations, level "+level+" completed.";
-              level=4;
+            if (first.classList.contains("selected") || third.classList.contains("selected")) {
+              tekst.innerHTML = "Congratulations, level " + level + " completed.";
+              level = 4;
               newLevel(level);
-              
+
               tekst.style.marginTop = "1.5em";
               replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
 
-            else
-            {
+            else {
               level++;
               tekst.innerHTML = "Maze completed";
-              if(level!=4)
-              nivo.innerHTML = "Play level "+level;
+              if (level != 4)
+                nivo.innerHTML = "Play level " + level;
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
@@ -351,9 +342,9 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            if (first.classList.contains("selected")||third.classList.contains("selected")){
-              tekst.innerHTML = "Congratulations, level "+level+" completed.";
-              level=4;
+            if (first.classList.contains("selected") || third.classList.contains("selected")) {
+              tekst.innerHTML = "Congratulations, level " + level + " completed.";
+              level = 4;
               newLevel(level);
               tekst.style.marginTop = "1.5em";
               replay.style.display = "none";
@@ -361,12 +352,11 @@ start.addEventListener("click", (e) => {
               backdrop.style.display = "block";
             }
 
-            else
-            {
+            else {
               level++;
               tekst.innerHTML = "Maze completed";
-              if(level!=4)
-              nivo.innerHTML = "Play level "+level;
+              if (level != 4)
+                nivo.innerHTML = "Play level " + level;
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
@@ -386,23 +376,22 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            if (first.classList.contains("selected")||third.classList.contains("selected")){
-              tekst.innerHTML = "Congratulations, level "+level+" completed.";
-              level=4;
+            if (first.classList.contains("selected") || third.classList.contains("selected")) {
+              tekst.innerHTML = "Congratulations, level " + level + " completed.";
+              level = 4;
               newLevel(level);
-              
+
               tekst.style.marginTop = "1.5em";
               replay.style.display = "none";
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
 
-            else
-            {
+            else {
               level++;
               tekst.innerHTML = "Maze completed";
-              if(level!=4)
-              nivo.innerHTML = "Play level "+level;
+              if (level != 4)
+                nivo.innerHTML = "Play level " + level;
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
@@ -423,9 +412,9 @@ start.addEventListener("click", (e) => {
           if (current.goal) {
             winSound.play();
             generationComplete = false;
-            if (first.classList.contains("selected")||third.classList.contains("selected")){
-              tekst.innerHTML = "Congratulations, level "+level+" completed.";
-              level=4;
+            if (first.classList.contains("selected") || third.classList.contains("selected")) {
+              tekst.innerHTML = "Congratulations, level " + level + " completed.";
+              level = 4;
               newLevel(level);
               tekst.style.marginTop = "1.5em";
               replay.style.display = "none";
@@ -433,16 +422,15 @@ start.addEventListener("click", (e) => {
               backdrop.style.display = "block";
             }
 
-            else
-            {
+            else {
               level++;
               tekst.innerHTML = "Maze completed";
-              if(level!=4)
-              nivo.innerHTML = "Play level "+level;
+              if (level != 4)
+                nivo.innerHTML = "Play level " + level;
               complete.style.display = "block";
               backdrop.style.display = "block";
             }
- 
+
           }
         }
         break;
@@ -479,10 +467,10 @@ start.addEventListener("click", (e) => {
         nivo.innerHTML = "Play again";
         break;
       case 4:
-        if(first.classList.contains("selected")|| third.classList.contains("selected")){
-          setTimeout(()=>{
+        if (first.classList.contains("selected") || third.classList.contains("selected")) {
+          setTimeout(() => {
             location.reload();
-          },3000);
+          }, 3000);
         }
         else
           location.reload();
@@ -509,7 +497,7 @@ start.addEventListener("click", (e) => {
 
 //Styling za zacetni menu
 
-level1.addEventListener("click",(e)=>{
+level1.addEventListener("click", (e) => {
   level2.classList.remove("selected");
   level3.classList.remove("selected");
   level2.classList.remove("chosen");
@@ -518,7 +506,7 @@ level1.addEventListener("click",(e)=>{
   level1.classList.add("chosen");
 
 })
-level2.addEventListener("click",(e)=>{
+level2.addEventListener("click", (e) => {
   level3.classList.remove("selected");
   level1.classList.remove("selected");
   level3.classList.remove("chosen");
@@ -526,7 +514,7 @@ level2.addEventListener("click",(e)=>{
   level2.classList.add("selected");
   level2.classList.add("chosen");
 })
-level3.addEventListener("click",(e)=>{
+level3.addEventListener("click", (e) => {
   level1.classList.remove("selected");
   level2.classList.remove("selected");
   level1.classList.remove("chosen");
@@ -535,7 +523,7 @@ level3.addEventListener("click",(e)=>{
   level3.classList.add("chosen");
 })
 
-first.addEventListener("click",() =>{
+first.addEventListener("click", () => {
   second.classList.remove("selected");
   third.classList.remove("selected");
   first.classList.add("selected");
@@ -544,7 +532,7 @@ first.addEventListener("click",() =>{
   start.style.display = "none";
 })
 
-second.addEventListener("click",() =>{
+second.addEventListener("click", () => {
   first.classList.remove("selected");
   third.classList.remove("selected");
   second.classList.add("selected");
@@ -553,7 +541,7 @@ second.addEventListener("click",() =>{
   start.style.display = "block";
 })
 
-third.addEventListener("click",() =>{
+third.addEventListener("click", () => {
   first.classList.remove("selected");
   second.classList.remove("selected");
   third.classList.add("selected");
@@ -565,8 +553,8 @@ third.addEventListener("click",() =>{
 const select = document.getElementById("select");
 const options = document.querySelector(".options");
 const opis = document.querySelector(".opis");
-select.addEventListener("click",()=>{
-  if(first.classList.contains("selected")){
+select.addEventListener("click", () => {
+  if (first.classList.contains("selected")) {
     options.style.visibility = "visible";
     first.style.display = "none";
     second.style.display = "none";
@@ -575,7 +563,7 @@ select.addEventListener("click",()=>{
     opis.style.display = "none";
   }
 
- 
+
 })
 
 //Glasba in zvok
@@ -583,7 +571,7 @@ let play = document.getElementById("play");
 let audio = new Audio('audio/song.mp3');
 //zvoki
 let moveSound = new Audio('audio/move.wav');
-    moveSound.volume = 0.5;
+moveSound.volume = 0.5;
 let winSound = new Audio('audio/win.wav');
 let menuSound = new Audio('audio/menu.mp3');
 
@@ -601,7 +589,7 @@ function stopSong() {
   document.getElementById("pause").style.display = "block";
 }
 
-function playSound(){
+function playSound() {
   menuSound.play();
 }
 
@@ -614,12 +602,12 @@ info.addEventListener("click", (e) => {
   playSound();
   swal.fire({
     title: 'Instructions',
-        text: "Choose the playing style you prefer. The maze will be automatically generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!",
-        background: "#55cc55",
-        customClass: {
-            confirmButton: 'no-border',
-          },
-        confirmButtonColor: '#353535',
+    text: "Choose the playing style you prefer. The maze will be automatically generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!",
+    background: "#55cc55",
+    customClass: {
+      confirmButton: 'no-border',
+    },
+    confirmButtonColor: '#353535',
   });
 })
 
@@ -628,12 +616,12 @@ copy.addEventListener("click", (e) => {
   playSound();
   swal.fire({
     title: 'Credits',
-        text: "Made by Andrej Skočir",
-        background: "#55cc55",
-        customClass: {
-            confirmButton: 'no-border',
-          },
-        confirmButtonColor: '#353535',
+    text: "Made by Andrej Skočir",
+    background: "#55cc55",
+    customClass: {
+      confirmButton: 'no-border',
+    },
+    confirmButtonColor: '#353535',
   });
 
 })
