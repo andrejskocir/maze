@@ -12,6 +12,7 @@ let grid;
 const first = document.getElementById("first-option");
 const second = document.getElementById("second-option");
 const third = document.getElementById("third-option");
+const backArrow = document.querySelector(".back-icon");
 
 //leveli
 const level1 = document.getElementById("level1");
@@ -45,6 +46,7 @@ function getLevel() {
 start.addEventListener("click", (e) => {
   playSound();
   getLevel();
+  maze.style.display = "block";
   start.style.display = "none";
   container.style.display = "none";
   class Maze {
@@ -517,7 +519,7 @@ first.addEventListener("click", () => {
   second.classList.remove("selected");
   third.classList.remove("selected");
   first.classList.add("selected");
-  options.style.visibility = "hidden";
+  options.style.display = "none";
   select.style.display = "block";
   start.style.display = "none";
 })
@@ -526,7 +528,7 @@ second.addEventListener("click", () => {
   first.classList.remove("selected");
   third.classList.remove("selected");
   second.classList.add("selected");
-  options.style.visibility = "hidden";
+  options.style.display = "none";
   select.style.display = "none";
   start.style.display = "block";
 })
@@ -535,7 +537,7 @@ third.addEventListener("click", () => {
   first.classList.remove("selected");
   second.classList.remove("selected");
   third.classList.add("selected");
-  options.style.visibility = "hidden";
+  options.style.display = "none";
   select.style.display = "none";
   start.style.display = "block";
 })
@@ -545,17 +547,28 @@ const options = document.querySelector(".options");
 const opis = document.querySelector(".opis");
 select.addEventListener("click", () => {
   if (first.classList.contains("selected")) {
-    options.style.visibility = "visible";
+    options.style.display = "flex";
     first.style.display = "none";
     second.style.display = "none";
     select.style.display = "none";
     start.style.display = "block";
     opis.style.display = "none";
   }
-
-
 })
 
+backArrow.addEventListener("click", ()=>{
+  playSound();
+  first.classList.remove("selected");
+  level1.classList.remove("selected","chosen");
+  level2.classList.remove("selected","chosen");
+  level3.classList.remove("selected","chosen");
+  options.style.display = "none";
+  first.style.display = "block";
+  second.style.display = "block";
+  select.style.display = "block";
+  start.style.display = "none";
+  opis.style.display = "block";
+})
 //Glasba in zvok
 let play = document.getElementById("play");
 let audio = new Audio('audio/song.mp3');
