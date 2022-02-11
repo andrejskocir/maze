@@ -554,6 +554,13 @@ select.addEventListener("click", () => {
     start.style.display = "block";
     opis.style.display = "none";
   }
+  else{
+    swal.fire({
+      title: "Choose playing style!",
+      background: "#55cc55",
+      confirmButtonColor: '#353535',
+    })
+  } 
 })
 
 backArrow.addEventListener("click", ()=>{
