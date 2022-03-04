@@ -408,6 +408,9 @@ canvas {
   top: 3.7em;
   right: 10.55em;
 }
+:-moz-any(#znak){
+  top: 4em;
+}
 #instructions{
   text-align: left;
 }
