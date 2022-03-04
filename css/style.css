@@ -399,3 +399,15 @@ to{
 canvas {
   display: none;
 }
+
+#znak{
+  position: absolute;
+  color: #545454;
+  font-size: smaller;
+  transform: rotate(180deg);
+  top: 3.7em;
+  right: 10.55em;
+}
+#instructions{
+  text-align: left;
+}

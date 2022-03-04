@@ -612,7 +612,7 @@ info.addEventListener("click", (e) => {
   playSound();
   swal.fire({
     title: 'Instructions',
-    text: "Choose the playing style you prefer. The maze will be automatically generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard. Good luck!",
+    html: '<p id="instructions">Choose the playing style you prefer. The maze will be automatically generated to you. Your goal is to get to the X icon. Move with your arrow keys on the keyboard.<p>',
     background: "#55cc55",
     customClass: {
       confirmButton: 'no-border',
@@ -622,11 +622,12 @@ info.addEventListener("click", (e) => {
 })
 
 
+
 copy.addEventListener("click", (e) => {
   playSound();
   swal.fire({
     title: 'Credits',
-    text: "Made by Andrej Skočir",
+    html: 'Made by Andrej Skoc<span id="znak"><b>^</b></span>ir',
     background: "#55cc55",
     customClass: {
       confirmButton: 'no-border',
